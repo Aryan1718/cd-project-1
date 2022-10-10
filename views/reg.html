@@ -84,7 +84,16 @@ span.psw {
 </style>
 </head>
 <body style="background-color:powderblue;">
-
+  <script>   
+    function lettersOnly(input){
+    var regx=/[^a-z0-9" "]/gi
+    input.value=input.value.replace(regx,"");
+   }
+   function lettersOnly1(input){
+    var regx=/[^0-9]/gi
+    input.value=input.value.replace(regx,"");
+   }
+   </script>
 <center><h2>MicroCouriers Registration Form</h2></center>
 
 <form action="/reg" method="post">
@@ -94,13 +103,13 @@ span.psw {
 
   <div class="container">
     <h8><label for="uname"><b>Username</b></label></h8>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+    <input type="text" placeholder="Enter Username" name="uname" onkeyup="lettersOnly(this)" required>
     <h8><label for="age"><b>AGE</b></label></h8>
-    <input type="text" placeholder="Enter Your Age" name="age" required>
+    <input type="text" placeholder="Enter Your Age" name="age" onkeyup="lettersOnly1(this)" required>
     <h8><label for="address"><b>ADDRESS</b></label></h8>
-    <input type="text" placeholder="Enter Your address" name="address" required>
+    <input type="text" placeholder="Enter Your address" name="address" onkeyup="lettersOnly(this)" required>
     <h8> <label for="psw"><b>Password</b></label></h8>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="psw" onkeyup="lettersOnly(this)" required>
 
     <button type="submit" onclick="alert('Thanks For Choosing Us');"><b><h5>Register</h5></b></button>
     <label>

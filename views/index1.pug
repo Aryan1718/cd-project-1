@@ -16,6 +16,10 @@ html
             li #[a(href="/disp") Display Order Information]
             li #[a(href="/") Contact Us]
             li #[a(href="/logout") Logout]
+            if(session.login)
+                li
+                    a(href='logout') Logout 
+            <span>{{request.session.user}}</span>
     section#introSection
         div MicroCouriers 
         div.small Book , Pay and Track orders online

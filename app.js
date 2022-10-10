@@ -10,6 +10,13 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 var mysql = require('mysql');
 var connection  = require('./database');
+
+const cookieParser = require("cookie-parser");
+
+
+app.use(cookieParser());
+app.use(session({ secret: "terraform123", saveUninitialized: true, resave: true }));
+
 // EXPRESS SPECIFIC STUFF
 app.use('/static', express.static('static')) // For serving static files
 app.use(express.urlencoded())
@@ -87,8 +94,12 @@ function decrypt1(encrypted) {
 ////////////////////////////////////////////////////////////////////////////////////////
 
 // ENDPOINTS
-
-
+require('express-dynamic-helpers-patch')(app);
+app.dynamicHelpers({
+session: function (req, res) {
+    return req.session;
+    }
+});
 app.get('/', (req, res) => {
     const params = {}
     res.status(200).render('index.pug', params);
@@ -105,14 +116,15 @@ app.get('/login', (req, res) => {
 })
 app.post('/login', function (request, response) {
     var username = request.body.uname;
-    
-    username=encrypt1(username)
-    var password=request.body.psw;
-    password=encrypt1(password)
+    var password = request.body.psw;
     if (username && password) {
-        connection.query('SELECT * FROM userdata WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
+        connection.query('SELECT * FROM login WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
             if (results.length > 0) {
-                response.redirect('/new1');
+                request.session.user = username;
+                request.session.save();
+                response.render('index1',{
+                    name:request.session.user
+                })
             }
             else {
                 response.send('Incorrect Username and/or Password!');
@@ -130,8 +142,6 @@ app.get('/reg', (req, res) => {
 })
 app.post('/reg', function (request, response) {
     var username = request.body.uname;
-    // var username = cipher.update(request.body.uname, "utf-8", "hex");
-    // encryptedData += cipher.final("hex");
     var password = request.body.psw;
     var age = request.body.age;
     var address = request.body.address;
@@ -139,20 +149,11 @@ app.post('/reg', function (request, response) {
         connection.getConnection(function (err) {
             if (err) throw err;
             console.log("Connected!");
-            var sql = "Insert into userdata (username,password,age,address) VALUES ('" +  encrypt1(request.body.uname) + "','" +  encrypt1(request.body.psw,13) + "','" +  encrypt1(request.body.age,15) + "','" +  encrypt1(request.body.address,14) + "')"
+            var sql = "Insert into userdata (username,password,age,address) VALUES ('" + request.body.uname + "','" + request.body.psw + "','" + request.body.age + "','" + request.body.address + "')"
             response.redirect('/new1');
             connection.query(sql, function (err, result) {
                 if (err) throw err;
-                // let try1= encrypt1(request.body.uname)
-                // console.log(try1)
-                // let tr2=decrypt1(try1)
-                // console.log(tr2)
-                // // let encryptedData = cipher.update(request.body.uname, "utf-8", "hex");
-                // encryptedData += cipher.final("hex");
-                // console.log("Encrypted message: " + encryptedData);
-                // let decryptedData = decipher.update(tr2, "hex", "utf-8");
-                // decryptedData += decipher.final("utf8");
-                // console.log("Decrypted message: " + decryptedData);
+                console.log(request.body.uname)
                 console.log("1 record inserted");
             });
             response.end();
@@ -214,6 +215,7 @@ app.post('/db', function (request, response) {
         });
     });
 });
+
 app.get('/logout', (req, res) => {
     res.render('index')
 })
