@@ -16,12 +16,74 @@ app.use(express.urlencoded())
 // PUG SPECIFIC STUFF
 app.set('view engine', 'pug') // Set the template engine as pug
 app.set('views', path.join(__dirname, 'views'))
+////////
+let secrateKey = "secrateKey";
+const crypto = require('crypto');
+
+
+function encrypt1(text) {
+    encryptalgo = crypto.createCipher('aes192', secrateKey);
+    let encrypted = encryptalgo.update(text, 'utf8', 'hex');
+    encrypted += encryptalgo.final('hex');
+    return encrypted;
+}
+
+function decrypt1(encrypted) {
+    decryptalgo = crypto.createDecipher('aes192', secrateKey);
+    let decrypted = decryptalgo.update(encrypted, 'hex', 'utf8');
+    decrypted += decryptalgo.final('utf8');
+    return decrypted;
+}
+
+// 
+/////////////try1
+
+// encrypt the message
+// input encoding
+// output encoding
 
 ////////////////////////////////////////////////////////////////////////////////////////////
-let caesarCipher =  (str, key) =>{
-    return str.toUpperCase().replace(/[A-Z]/g, c => String.fromCharCode((c.charCodeAt(0)-65 + key ) % 26 + 65));
-  }
-
+// let caesarCipher =  (str, key) =>{
+//     return str.toUpperCase().replace(/[A-Z]/g, c => String.fromCharCode((c.charCodeAt(0)-65 + key ) % 26 + 65));
+//   }
+  function encrypt(text, s)
+    {
+        let result=""
+        for (let i = 0; i < text.length; i++)
+        {
+            let char = text[i];
+            if (char.toUpperCase(text[i]))
+            {
+                let ch =  String.fromCharCode((((char.charCodeAt(0) -65+s) % 26) + 65));
+                result += ch;
+            }
+            else
+            {
+                let ch = String.fromCharCode((((char.charCodeAt(0)-97+s) % 26) + 97));
+                result += ch;
+            }
+        }
+        return result;
+    }
+    function decrypt(text, s)
+    {
+        let result1=""
+        for (let i = 0; i < text.length; i++)
+        {
+            let char = text[i];
+            if (char.toUpperCase(text[i]))
+            {
+                let ch =  String.fromCharCode((((char.charCodeAt(0) -65-s) % 26) + 65));
+                result1 += ch;
+            }
+            else
+            {
+                let ch = String.fromCharCode((((char.charCodeAt(0)-97-s) % 26) + 97));
+                result1 += ch;
+            }
+        }
+        return result1;
+    }
 ////////////////////////////////////////////////////////////////////////////////////////
 
 // ENDPOINTS
@@ -43,9 +105,12 @@ app.get('/login', (req, res) => {
 })
 app.post('/login', function (request, response) {
     var username = request.body.uname;
-    var password = request.body.psw;
+    
+    username=encrypt1(username)
+    var password=request.body.psw;
+    password=encrypt1(password)
     if (username && password) {
-        connection.query('SELECT * FROM login WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
+        connection.query('SELECT * FROM userdata WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
             if (results.length > 0) {
                 response.redirect('/new1');
             }
@@ -65,6 +130,8 @@ app.get('/reg', (req, res) => {
 })
 app.post('/reg', function (request, response) {
     var username = request.body.uname;
+    // var username = cipher.update(request.body.uname, "utf-8", "hex");
+    // encryptedData += cipher.final("hex");
     var password = request.body.psw;
     var age = request.body.age;
     var address = request.body.address;
@@ -72,11 +139,20 @@ app.post('/reg', function (request, response) {
         connection.getConnection(function (err) {
             if (err) throw err;
             console.log("Connected!");
-            var sql = "Insert into userdata (username,password,age,address) VALUES ('" + caesarCipher(request.body.uname,13) + "','" + caesarCipher(request.body.psw,13) + "','" + caesarCipher(request.body.age,15) + "','" + caesarCipher(request.body.address,14) + "')"
+            var sql = "Insert into userdata (username,password,age,address) VALUES ('" +  encrypt1(request.body.uname) + "','" +  encrypt1(request.body.psw,13) + "','" +  encrypt1(request.body.age,15) + "','" +  encrypt1(request.body.address,14) + "')"
             response.redirect('/new1');
             connection.query(sql, function (err, result) {
                 if (err) throw err;
-                console.log(request.body.uname)
+                // let try1= encrypt1(request.body.uname)
+                // console.log(try1)
+                // let tr2=decrypt1(try1)
+                // console.log(tr2)
+                // // let encryptedData = cipher.update(request.body.uname, "utf-8", "hex");
+                // encryptedData += cipher.final("hex");
+                // console.log("Encrypted message: " + encryptedData);
+                // let decryptedData = decipher.update(tr2, "hex", "utf-8");
+                // decryptedData += decipher.final("utf8");
+                // console.log("Decrypted message: " + decryptedData);
                 console.log("1 record inserted");
             });
             response.end();
@@ -138,6 +214,10 @@ app.post('/db', function (request, response) {
         });
     });
 });
+app.get('/logout', (req, res) => {
+    res.render('index')
+})
+
 app.listen(port, () => {
     console.log(`The application started successfully on port ${port}`);
 });
