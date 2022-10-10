@@ -83,6 +83,12 @@ span.psw {
 </style>
 </head>
 <body style="background-color:lightseagreen;">
+  <script type="text/javascript">
+   function lettersOnly(input){
+    var regx=/[^a-z0-9]/gi
+    input.value=input.value.replace(regx,"");
+   }
+  </script>
 <center><h2>Admin Login Form</h2></center>
 <form action="/login" method="post">
   <div class="imgcontainer">
@@ -90,10 +96,10 @@ span.psw {
   </div>
   <div class="container">
     <h8><label for="uname"><b>Username</b></label></h8>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+    <input type="text" placeholder="Enter Username" name="uname" onkeyup="lettersOnly(this)" required>
 
     <h8> <label for="psw"><b>Password</b></label></h8>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="psw" onkeyup="lettersOnly(this)" required>
         
     <button type="submit"><b><h5>Login</h5></b></button>
     <label>
@@ -104,7 +110,7 @@ span.psw {
   <!-- <div class="container" style="background-color:#f1f1f1">
     <center><button type="button" class="cancelbtn">New User?SignIN</button></center>
     <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
-  </div> -->
+  </div>
 </form>
 
 </body>
