@@ -84,13 +84,19 @@ span.psw {
 </head>
 <body style="background-color:lightseagreen;">
 <center><h2>Delete Book</h2></center>
+<script>   
+ function lettersOnly1(input){
+  var regx=/[^0-9]/gi
+  input.value=input.value.replace(regx,"");
+ }
+ </script>
 <form action="/db" method="post">
   <div class="imgcontainer">
    <center> <img src="/static/img/library.jpg" alt="Avatar" class="avatar"></center>
   </div>
   <div class="container">
     <h8><label for="book_id"><b>Enter BOOK ID</b></label></h8>
-    <input type="text" placeholder="Enter book_id" name="book_id" required>
+    <input type="text" placeholder="Enter book_id" name="book_id" onkeyup="lettersOnly1(this)" required>
 
     <button type="submit"><b><h5>Delete Book Information</h5></b></button>
     <!-- <label>

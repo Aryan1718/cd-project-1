@@ -83,6 +83,16 @@ span.psw {
 </style>
 </head>
 <body style="background-color:lightseagreen;">
+<script>   
+  function lettersOnly(input){
+  var regx=/[^a-z0-9" "]/gi
+  input.value=input.value.replace(regx,"");
+ }
+ function lettersOnly1(input){
+  var regx=/[^0-9]/gi
+  input.value=input.value.replace(regx,"");
+ }
+ </script>
 <center><h2>Add A Book</h2></center>
 <form action="/addbook" method="post">
   <div class="imgcontainer">
@@ -90,13 +100,13 @@ span.psw {
   </div>
   <div class="container">
     <h8><label for="bookname"><b>BookName</b></label></h8>
-    <input type="text" placeholder="Enter bookname" name="bookname" required><br>
+    <input type="text" placeholder="Enter bookname" name="bookname" onkeyup="lettersOnly(this)" required><br>
 
     <h8> <label for="author"><b>Book Author</b></label></h8>
-    <input type="text" placeholder="Enter author name" name="author" required><br>
+    <input type="text" placeholder="Enter author name" name="author" onkeyup="lettersOnly(this)" required><br>
 
     <h8> <label for="price"><b>Price</b></label></h8>
-    <input type="text" placeholder="Enter price" name="price" required><br>
+    <input type="text" placeholder="Enter price" name="price" onkeyup="lettersOnly1(this)" required><br>
         
     <button type="submit"><b><h5>ADD BOOK</h5></b></button>
   </div>

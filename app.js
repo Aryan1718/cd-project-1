@@ -17,14 +17,19 @@ app.use(express.urlencoded())
 app.set('view engine', 'pug') // Set the template engine as pug
 app.set('views', path.join(__dirname, 'views'))
 // ENDPOINTS
+
+
 app.get('/', (req, res) => {
     const params = {}
     res.status(200).render('index.pug', params);
 })
-app.get('/new1', (req, res) => {
-    const params = {}
-    res.status(200).render('index1.pug', params);
-})
+
+
+// app.get('/new1', (req, res) => {
+//     const params = {}
+//     res.status(200).render('index1.pug', params);
+// })
+
 app.get('/login', (req, res) => {
     res.sendFile(path2 + 'login.html')
 })
@@ -45,6 +50,8 @@ app.post('/login', function (request, response) {
         response.send('Please enter Username and Password!');
     }
 });
+
+
 app.get('/reg', (req, res) => {
     res.sendFile(path2 + 'reg.html')
 })
@@ -71,7 +78,7 @@ app.post('/reg', function (request, response) {
         response.end();
     }
 });
-app.get('/addbook', (req, res) => {
+app.get('/book', (req, res) => {
     res.sendFile(path2 + 'addbook.html')
 })
 app.post('/addbook', function (request, response) {
@@ -105,7 +112,7 @@ app.get('/disp', (request, response) => {
     });
 });
 
-app.get('/db', (req, res) => {
+app.get('/del', (req, res) => {
     res.sendFile(path2 + 'deletebook.html')
 })
 app.post('/db', function (request, response) {
