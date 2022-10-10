@@ -10,19 +10,47 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 var mysql = require('mysql');
 var connection  = require('./database');
-
 const cookieParser = require("cookie-parser");
-
-
 app.use(cookieParser());
 app.use(session({ secret: "terraform123", saveUninitialized: true, resave: true }));
-
 // EXPRESS SPECIFIC STUFF
 app.use('/static', express.static('static')) // For serving static files
 app.use(express.urlencoded())
 // PUG SPECIFIC STUFF
 app.set('view engine', 'pug') // Set the template engine as pug
 app.set('views', path.join(__dirname, 'views'))
+///////////////otp
+
+  
+  // Function to generate OTP
+  function generateOTP() {
+            
+      // Declare a digits variable 
+      // which stores all digits
+      var digits = '0123456789';
+      let OTP = '';
+      for (let i = 0; i < 4; i++ ) {
+          OTP += digits[Math.floor(Math.random() * 10)];
+      }
+      return OTP;
+  }
+var otp1=generateOTP()
+console.log(otp1)
+//////
+// var sid = "ACeca2a4f6bba192bd3604722a9c9e8c4d";
+// var auth_token = "c844bf839f0967679acfab696aa9fcd3";
+// var twilio = require("twilio")(sid, auth_token);
+// twilio.messages
+//   .create({
+//     from: "+15076937362",
+//     to: "+919558771737",
+//     body: otp1,
+//   })
+//   .then(function(res) {console.log("message has sent!")})
+//   .catch(function(err)  {
+//     console.log(err);
+//   });
+// console.log(twilio.messages.body)
 ////////
 let secrateKey = "secrateKey";
 const crypto = require('crypto');
@@ -100,6 +128,10 @@ session: function (req, res) {
     return req.session;
     }
 });
+app.get('/otp', (req, res) => {
+    // const params = {}
+    res.sendFile(path2 + 'otp.html')
+})
 app.get('/', (req, res) => {
     const params = {}
     res.status(200).render('index.pug', params);
@@ -115,16 +147,12 @@ app.get('/login', (req, res) => {
     res.sendFile(path2 + 'login.html')
 })
 app.post('/login', function (request, response) {
-    var username = request.body.uname;
-    var password = request.body.psw;
+    var username = encrypt1(request.body.uname);
+    var password = encrypt1(request.body.psw);
     if (username && password) {
-        connection.query('SELECT * FROM login WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
+        connection.query('SELECT * FROM userdata WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
             if (results.length > 0) {
-                request.session.user = username;
-                request.session.save();
-                response.render('index1',{
-                    name:request.session.user
-                })
+                response.redirect('/otp');
             }
             else {
                 response.send('Incorrect Username and/or Password!');
@@ -135,6 +163,15 @@ app.post('/login', function (request, response) {
         response.send('Please enter Username and Password!');
     }
 });
+app.post('/verify', (req, res) => {
+    // const params = {}
+    var otp=req.body.otp
+    console.log(otp)
+    if(otp===otp1)
+    {
+        res.redirect('/new1');
+    }
+})
 
 
 app.get('/reg', (req, res) => {
@@ -149,7 +186,7 @@ app.post('/reg', function (request, response) {
         connection.getConnection(function (err) {
             if (err) throw err;
             console.log("Connected!");
-            var sql = "Insert into userdata (username,password,age,address) VALUES ('" + request.body.uname + "','" + request.body.psw + "','" + request.body.age + "','" + request.body.address + "')"
+            var sql = "Insert into userdata (username,password,age,address) VALUES ('" + encrypt1(request.body.uname) + "','" + encrypt1(request.body.psw) + "','" + encrypt1(request.body.age) + "','" + encrypt1(request.body.address) + "')"
             response.redirect('/new1');
             connection.query(sql, function (err, result) {
                 if (err) throw err;
