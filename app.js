@@ -20,11 +20,8 @@ app.use(express.urlencoded())
 app.set('view engine', 'pug') // Set the template engine as pug
 app.set('views', path.join(__dirname, 'views'))
 ///////////////otp
-
-  
   // Function to generate OTP
   function generateOTP() {
-            
       // Declare a digits variable 
       // which stores all digits
       var digits = '0123456789';
@@ -210,7 +207,7 @@ app.post('/addbook', function (request, response) {
     connection.getConnection(function (err) {
         if (err) throw err;
         console.log("Connected!");
-        var sql = "Insert into addbook (bookname,author,price) VALUES ('" + request.body.bookname + "','" + request.body.author + "','" + request.body.price + "')"
+        var sql = "Insert into addbook (bookname,author,price) VALUES ('" + encrypt1(request.body.bookname) + "','" + encrypt1(request.body.author) + "','" + encrypt1(request.body.price) + "')"
         connection.query(sql, function (err, result) {
             if (err) throw err;
             response.send("Book  added successfully")
