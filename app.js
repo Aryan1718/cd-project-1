@@ -35,7 +35,7 @@ var otp1=generateOTP()
 console.log(otp1)
 ////
 var sid = "ACeca2a4f6bba192bd3604722a9c9e8c4d";
-var auth_token = "c844bf839f0967679acfab696aa9fcd3";
+var auth_token = "bf01e83583f815d6f753288f5ce55d2e";
 var twilio = require("twilio")(sid, auth_token);
 twilio.messages
   .create({
@@ -47,7 +47,6 @@ twilio.messages
   .catch(function(err)  {
     console.log(err);
   });
-console.log(twilio.messages.body)
 //////
 let secrateKey = "secrateKey";
 const crypto = require('crypto');
