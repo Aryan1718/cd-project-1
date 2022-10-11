@@ -33,22 +33,22 @@ app.set('views', path.join(__dirname, 'views'))
   }
 var otp1=generateOTP()
 console.log(otp1)
+////
+var sid = "ACeca2a4f6bba192bd3604722a9c9e8c4d";
+var auth_token = "c844bf839f0967679acfab696aa9fcd3";
+var twilio = require("twilio")(sid, auth_token);
+twilio.messages
+  .create({
+    from: "+15076937362",
+    to: "+919558771737",
+    body: otp1,
+  })
+  .then(function(res) {console.log("message has sent!")})
+  .catch(function(err)  {
+    console.log(err);
+  });
+console.log(twilio.messages.body)
 //////
-// var sid = "ACeca2a4f6bba192bd3604722a9c9e8c4d";
-// var auth_token = "c844bf839f0967679acfab696aa9fcd3";
-// var twilio = require("twilio")(sid, auth_token);
-// twilio.messages
-//   .create({
-//     from: "+15076937362",
-//     to: "+919558771737",
-//     body: otp1,
-//   })
-//   .then(function(res) {console.log("message has sent!")})
-//   .catch(function(err)  {
-//     console.log(err);
-//   });
-// console.log(twilio.messages.body)
-////////
 let secrateKey = "secrateKey";
 const crypto = require('crypto');
 
