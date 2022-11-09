@@ -8,6 +8,7 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style background-color:black;>
+
 body {font-family: Arial, Helvetica, sans-serif;}
 form {border: 3px solid #f1f1f1;}
 h2 {
@@ -81,8 +82,10 @@ span.psw {
      width: 100%;
   }
 }
+
 </style>
 </head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <body style="background-color:powderblue;">
   <script>   
     function lettersOnly(input){
@@ -93,8 +96,17 @@ span.psw {
     var regx=/[^0-9]/gi
     input.value=input.value.replace(regx,"");
    }
+    function myFunction() {
+    var x = document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
    </script>
-<center><h2>MicroCouriers Registration Form</h2></center>
+   
+<center><h2>Library User Registration Form</h2></center>
 
 <form action="/reg" method="post">
   <div class="imgcontainer">
@@ -109,8 +121,10 @@ span.psw {
     <h8><label for="address"><b>ADDRESS</b></label></h8>
     <input type="text" placeholder="Enter Your address" name="address" onkeyup="lettersOnly(this)" required>
     <h8> <label for="psw"><b>Password</b></label></h8>
-    <input type="password" placeholder="Enter Password" name="psw" onkeyup="lettersOnly(this)" required>
-
+    <input type="password" placeholder="Enter Password" name="psw" id="myInput" required>
+    <h8><label for="mno"><b>Enter Mobile Number</b></label></h8>
+    <input type="text" placeholder="Enter mno" name="mno" onkeyup="lettersOnly(this)" required>
+    <input type="checkbox" onclick="myFunction()">Show Password
     <button type="submit" onclick="alert('Thanks For Choosing Us');"><b><h5>Register</h5></b></button>
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me

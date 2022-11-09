@@ -33,20 +33,32 @@ app.set('views', path.join(__dirname, 'views'))
   }
 var otp1=generateOTP()
 console.log(otp1)
-////
-// var sid = "ACeca2a4f6bba192bd3604722a9c9e8c4d";
-// var auth_token = "bf01e83583f815d6f753288f5ce55d2e";
-// var twilio = require("twilio")(sid, auth_token);
-// twilio.messages
-//   .create({
-//     from: "+15076937362",
-//     to: "+919558771737",
-//     body: otp1,
-//   })
-//   .then(function(res) {console.log("message has sent!")})
-//   .catch(function(err)  {
-//     console.log(err);
-//   });
+
+
+var passChange={
+    '@':'x',
+    '=':'p',
+    "'":'z',
+    '#':'a',
+    '$':'s',
+    "%":'t',
+    '^':'y',
+    '&':'u',
+    '(':'i',
+    ')':'q',
+    '-':'p',
+    '+':'v',
+    '<':'m',
+    '>':'n',
+    ',':'b',
+    '.':'c',
+    '?':'g',
+    '/':'o'
+}
+
+console.log(passChange)
+
+// console.log(twilio.messages.body)
 //////
 let secrateKey = "secrateKey";
 const crypto = require('crypto');
@@ -145,9 +157,32 @@ app.get('/login', (req, res) => {
 app.post('/login', function (request, response) {
     var username = encrypt1(request.body.uname);
     var password = encrypt1(request.body.psw);
+    var r1;
     if (username && password) {
         connection.query('SELECT * FROM userdata WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
             if (results.length > 0) {
+                // var 
+                // console.log(decrypt1(results[0]['mno']))
+//                 var number1="+91";
+//                 var number2=decrypt1(results[0]['mno'])
+//                 var finalnumber= number1.concat(number2)
+//                 console.log(finalnumber)
+
+//                 console.log(typeof(number))
+//                 //
+//                 var sid = "ACeca2a4f6bba192bd3604722a9c9e8c4d";
+//                 var auth_token = "14995be3ca27ccd16ab7c2768be47d17";
+//                 var twilio = require("twilio")(sid, auth_token);
+//                 twilio.messages
+//                 .create({
+//                     from: "+15076937362",
+//                     to: finalnumber,
+//                     body: otp1,
+//                 })
+//                 .then(function(res) {console.log("message has sent!")})
+//                 .catch(function(err)  {
+//                     console.log(err);
+//   });
                 response.redirect('/otp');
             }
             else {
@@ -178,17 +213,30 @@ app.post('/reg', function (request, response) {
     var password = request.body.psw;
     var age = request.body.age;
     var address = request.body.address;
+    var mno = request.body.mno;
+    console.log(password);
+    
+    for(var i=0;i<=password.length;i++){
+        console.log(password[i]);
+            for(var key in passChange) {
+                var value = passChange[key];
+                if(password[i]==key){
+                    password=password.replace(password[i],value)
+                }
+
+              }
+            
+        }
+
+    console.log(password)
+
     if (username && password) {
         connection.getConnection(function (err) {
             if (err) throw err;
             console.log("Connected!");
-            var sql = "Insert into userdata (username,password,age,address) VALUES ('" + encrypt1(request.body.uname) + "','" + encrypt1(request.body.psw) + "','" + encrypt1(request.body.age) + "','" + encrypt1(request.body.address) + "')"
+            var sql = "Insert into userdata (username,password,age,address,mno) VALUES ('" + encrypt1(request.body.uname) + "','" + encrypt1(request.body.psw) + "','" + encrypt1(request.body.age) + "','" + encrypt1(request.body.address) + "','" + encrypt1(request.body.mno) + "')"
+            console.log(request.body.mno)
             response.redirect('/new1');
-            connection.query(sql, function (err, result) {
-                if (err) throw err;
-                console.log(request.body.uname)
-                console.log("1 record inserted");
-            });
             response.end();
         });
     } else {
@@ -211,6 +259,7 @@ app.post('/addbook', function (request, response) {
             if (err) throw err;
             response.send("Book  added successfully")
             console.log("1 record inserted");
+            console.log(decrypt1(request.body.price))
         });
     });
 });
