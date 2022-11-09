@@ -301,7 +301,12 @@ app.post('/db', function (request, response) {
 app.get('/logout', (req, res) => {
     res.render('index')
 })
-
+app.get('/pay', (req, res) => {
+    res.sendFile(path2 + 'pay.html')
+})
+app.get('/top', (req, res) => {
+    res.sendFile(path2 + 'table.html')
+})
 app.listen(port, () => {
     console.log(`The application started successfully on port ${port}`);
 });
