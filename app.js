@@ -34,19 +34,19 @@ app.set('views', path.join(__dirname, 'views'))
 var otp1=generateOTP()
 console.log(otp1)
 ////
-var sid = "ACeca2a4f6bba192bd3604722a9c9e8c4d";
-var auth_token = "bf01e83583f815d6f753288f5ce55d2e";
-var twilio = require("twilio")(sid, auth_token);
-twilio.messages
-  .create({
-    from: "+15076937362",
-    to: "+919558771737",
-    body: otp1,
-  })
-  .then(function(res) {console.log("message has sent!")})
-  .catch(function(err)  {
-    console.log(err);
-  });
+// var sid = "ACeca2a4f6bba192bd3604722a9c9e8c4d";
+// var auth_token = "bf01e83583f815d6f753288f5ce55d2e";
+// var twilio = require("twilio")(sid, auth_token);
+// twilio.messages
+//   .create({
+//     from: "+15076937362",
+//     to: "+919558771737",
+//     body: otp1,
+//   })
+//   .then(function(res) {console.log("message has sent!")})
+//   .catch(function(err)  {
+//     console.log(err);
+//   });
 //////
 let secrateKey = "secrateKey";
 const crypto = require('crypto');
