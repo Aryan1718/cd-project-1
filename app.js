@@ -161,6 +161,8 @@ app.get('/login', (req, res) => {
 app.post('/login', function (request, response) {
     var username = encrypt1(request.body.uname);
     var password = encrypt1(request.body.psw);
+    console.log(username)
+    console.log(password)
     var r1;
     if (username && password) {
         connection.query('SELECT * FROM userdata WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
@@ -239,6 +241,10 @@ app.post('/reg', function (request, response) {
             if (err) throw err;
             console.log("Connected!");
             var sql = "Insert into userdata (username,password,age,address,mno) VALUES ('" + encrypt1(request.body.uname) + "','" + encrypt1(request.body.psw) + "','" + encrypt1(request.body.age) + "','" + encrypt1(request.body.address) + "','" + encrypt1(request.body.mno) + "')"
+            connection.query(sql,(err,result)=>{
+                if(err) throw err
+                console.log('Inserted...')
+            })
             console.log(request.body.mno)
             response.redirect('/new1');
             response.end();
