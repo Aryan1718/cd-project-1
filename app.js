@@ -169,26 +169,26 @@ app.post('/login', function (request, response) {
             if (results.length > 0) {
                 // var 
                 // console.log(decrypt1(results[0]['mno']))
-//                 var number1="+91";
-//                 var number2=decrypt1(results[0]['mno'])
-//                 var finalnumber= number1.concat(number2)
-//                 console.log(finalnumber)
+                var number1="+91";
+                var number2=decrypt1(results[0]['mno'])
+                var finalnumber= number1.concat(number2)
+                console.log(finalnumber)
 
-//                 console.log(typeof(number))
-//                 //
-//                 var sid = "ACeca2a4f6bba192bd3604722a9c9e8c4d";
-//                 var auth_token = "14995be3ca27ccd16ab7c2768be47d17";
-//                 var twilio = require("twilio")(sid, auth_token);
-//                 twilio.messages
-//                 .create({
-//                     from: "+15076937362",
-//                     to: finalnumber,
-//                     body: otp1,
-//                 })
-//                 .then(function(res) {console.log("message has sent!")})
-//                 .catch(function(err)  {
-//                     console.log(err);
-//   });
+                console.log(typeof(number))
+                //
+                var sid = "ACeca2a4f6bba192bd3604722a9c9e8c4d";
+                var auth_token = "14995be3ca27ccd16ab7c2768be47d17";
+                var twilio = require("twilio")(sid, auth_token);
+                twilio.messages
+                .create({
+                    from: "+15076937362",
+                    to: finalnumber,
+                    body: otp1,
+                })
+                .then(function(res) {console.log("message has sent!")})
+                .catch(function(err)  {
+                    console.log(err);
+  });
                 response.redirect('/otp');
             }
             else {
