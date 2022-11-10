@@ -240,7 +240,7 @@ app.post('/reg', function (request, response) {
         connection.getConnection(function (err) {
             if (err) throw err;
             console.log("Connected!");
-            var sql = "Insert into userdata (username,password,age,address,mno) VALUES ('" + encrypt1(request.body.uname) + "','" + encrypt1(request.body.psw) + "','" + encrypt1(request.body.age) + "','" + encrypt1(request.body.address) + "','" + encrypt1(request.body.mno) + "')"
+            var sql = "Insert into userdata (username,password,age,address,mno) VALUES ('" + encrypt1(request.body.uname) + "','" + encrypt1(request.body.psw) + "','" + (request.body.age) + "','" + encrypt1(request.body.address) + "','" + encrypt1(request.body.mno) + "')"
             connection.query(sql,(err,result)=>{
                 if(err) throw err
                 console.log('Inserted...')
