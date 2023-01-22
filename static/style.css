@@ -105,13 +105,20 @@ height: 42px;
 }
 
 .card-img{
-    height: 131px;
-    padding: 0 14px;
-    margin: 5px 9px;
+    height: 180px;
+    width: 300%;
+    display: block;
+    margin-left: auto;
+    display: flexbox;
+    margin-right: auto;
 }
 
 .card-img img{
-    height: inherit; 
+    height: inherit;
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .card-content{

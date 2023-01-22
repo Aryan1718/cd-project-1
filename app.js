@@ -288,7 +288,6 @@ app.get('/disp', (request, response) => {
         });
     });
 });
-
 app.get('/del', (req, res) => {
     res.sendFile(path2 + 'deletebook.html')
 })
@@ -354,6 +353,10 @@ app.post("/paynow", [parseUrl, parseJson], (req, res) => {
       });
   
   });
+app.get('/aboutus', (request, res) => {
+    res.sendFile(path2 + 'aboutus.html')
+});
+
 app.listen(port, () => {
     console.log(`The application started successfully on port ${port}`);
 });
