@@ -19,13 +19,21 @@
 #logo img{
 height: 42px;
     filter: invert(1);
+
+}
+.username-text
+{
+  color: white;
 }
 
 
 #navbar{
-    background-color: blue;
+    background-color: black;
     padding: 18px 14px;
     font-family: 'Yeon Sung' ;
+    position: sticky;
+    top:0;
+    right: 0;
 }
 #navbar ul{
     display: flex;
@@ -52,16 +60,16 @@ height: 42px;
 
 #introSection{
     padding-bottom: 40px;
-    color: white;
+    color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-family: 'ZCOOL QingKe HuangYou';
     font-size: 65px;
     align-items: center;
-    background: center/cover no-repeat url("/static/black.jpg") ;
+    /* background: center/cover no-repeat url("/static/darkblue.png") ; */
     height: 425px;
-    background-color: blue;
+    background-color: #30e3cb;
 }
 #introSection div.small{
     font-size: 52px;
@@ -83,13 +91,15 @@ height: 42px;
     padding-top: 12px;
 }
 
-.card{
-    display: inline-block;
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 30%;
-    margin: 23px 20px;
+.card {
+    width: 80%;
     height: 209px;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    margin: 23px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .card h3{
     text-align: center;
@@ -107,18 +117,18 @@ height: 42px;
 .card-img{
     height: 180px;
     width: 300%;
-    display: block;
-    margin-left: auto;
-    display: flexbox;
-    margin-right: auto;
+    /* display: block;
+    display: flex; */
 }
 
 .card-img img{
-    height: inherit;
-    width: 80%;
-    display: block;
-    margin-left: auto;
+    height: 18vh;
+    width: 100%;
+    margin-left: 150px;
+    padding: 15px;
     margin-right: auto;
+    background-size: cover;
+    background-position:center ;
 }
 
 .card-content{
@@ -144,5 +154,90 @@ height: 42px;
 #footer{
     background-color: black;
     height: 100px;
-
+    color:white;
+    padding:20px 0;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
 }
+
+/* #hero .images .image1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#hero .images .image1 img{
+    margin-left: -450px;
+    width: 400px;
+}
+ */
+ #feature{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: #66bfbf; */
+    flex-wrap: wrap;
+  }
+  
+  #feature .fa-box{
+    width: 450px;
+    text-align: center;
+    padding: 25px 15px;
+    cursor: pointer;
+    box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+    border: 1px solid #cce7d0;
+    border-radius: 4px;
+    margin: 50px 150px;
+    
+  }
+
+  #feature .fa-box:hover{
+    box-shadow: 10px 10px 54px rgba(70, 62, 221, 0.1);
+  }
+
+
+  
+  #feature .fa-box img{
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  #feature .fa-box h6{
+    font-size: 50px;
+    display: inline-block;
+    padding: 9px 8px 6px 8px;
+    line-height: 1;
+    border-radius: 4px;
+    color: #088178;
+    background-color:  #fddde4;;
+  }
+  #feature .fa-box:nth-child(2) h6{
+    background-color: #cdebbc;
+  }
+  #feature .fa-box:nth-child(3) h6{
+    background-color: #d1e8f2;
+  }
+  #feature .fa-box:nth-child(4) h6{
+    background-color: #cdd4f8;
+  }
+  #feature .fa-box:nth-child(5) h6{
+    background-color: #fff2e5;
+  }
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+}
+
+p.username-text {
+    font-size: 30px;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+  }

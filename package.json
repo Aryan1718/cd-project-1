@@ -10,7 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "express": "^4.17.1",
-    "nodemon": "^2.0.4"
+    "express-dynamic-helpers-patch": "^0.0.2",
+    "express-mysql-session": "^2.1.8",
+    "express-session": "^1.17.3",
+    "json-to-table": "^4.2.1",
+    "json2html": "^0.0.8",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.4",
+    "pug": "^3.0.2",
+    "twilio": "^4.7.2"
   }
 }

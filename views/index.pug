@@ -2,7 +2,7 @@
 doctype html
 html
   head
-    title COURIER
+    title Edustaff
     style
       include ../static/style.css
   body
@@ -11,7 +11,7 @@ html
             div#logo
             li #[a(href="/login") Login]
             li #[a(href="/reg") Register]
-            li #[a(href="/") Home]
+            li #[a(href="/") Home Page]
             //- li #[a(href="/book") BookOrder]
             //-  li #[a(href="/update") Update Order Information]
             //-  li #[a(href="/del") Delete Order Information]
@@ -21,35 +21,73 @@ html
     section#introSection
         div EduStaff<br>
         div.small Train your staff Easily
+    
+    //- <section id=hero>
+    //-     <div class="images">
+    //-         <div class="image1">
+    //-             <img src="../static/img/staff_training.jpg"/>
+    //-         </div>
+    //-         <div class="image1">
+    //-         </div>
+    //-         <div class="image1">
+    //-         </div>
+    //-     </div>
+    //- </section>
+    <div class="container">
+    <h2>Featured Services</h2>
+    </div>
+    <section id="feature" class="section-p1 ">
 
-    section#missionSection
-        h2 Our Services
-        div.card
-            h5 
-            div.card-box
-                div.card-img
-                    img(src="/static/img/staff_training.png")
-                div.card-content
-                    p <b><center> </center></b>
-        div.card
-            h3 
-            div.card-box
-                div.card-img
-                    img(src="/static/img/training.jpg")
-                div.card-content
-                    p <b></b>
-        div.card
-            h3 
-            div.card-box
-                div.card-img
-                    img(src="/static/img/train.jpg")
-                div.card-content
-                    p <b></b>
+    <div class="fa-box image1">
+        <img src="../static/img/staff_training.jpg" alt="...">
+        <h6>Online Training</h6>
+    </div>
+    <div class="fa-box image2">
+        <img src="../static/img/train.jpg" alt="...">
+        <h6>Complete Courses</h6>
+    </div>
+    <div class="fa-box image3">
+        <img src="../static/img/training.jpg" alt="...">
+        <h6>Earn Certificate</h6>
+    </div>
+    //- <div class="fa-box">
+    //-     <img src="../static/img/staff_training.jpg" alt="...">
+    //-     <h6>promotion</h6>
+    //- </div>
+    //- <div class="fa-box">
+    //-     <img src="../static/img/staff_training.jpg" alt="...">
+    //-     <h6>24/7 support</h6>
+    //- </div>
+</section>
 
-    //- section#sponsorsSection
-    //-     h2 Our Sponsors
+    //- section#missionSection
+    //-     h2 Our Services
+    //-     div.card
+    //-         div.card-box
+    //-             div.card-img
+    //-                 img(src="/static/img/staff_training.jpg")
+    //-             div.card-content
+                
+             
+    //-         div.card-box
+    //-             div.card-img
+    //-                 img(src="/static/img/training.jpg")
+    //-             div.card-content
+    //-                 p <b></b>
+            
+    //-         div.card-box
+    //-             div.card-img
+    //-                 img(src="/static/img/train.jpg")
+    //-             div.card-content
+    //-                 p <b></b>
+
+    //- //- section#sponsorsSection
+    //- //-     h2 Our Sponsors
     
     footer#footer
-        | our footer here
-    script
-      include ../static/index.js
+        | Copyright &copy; 2023 Edustaff
+
+
+          
+    //- script 
+    //-   include ../static/index.js

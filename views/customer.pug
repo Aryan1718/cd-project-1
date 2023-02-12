@@ -1,0 +1,37 @@
+<!-- index.pug -->
+
+doctype html
+html
+  head
+    title Customer Care Course
+    link(rel="stylesheet", type="text/css", href="/static/style3.css")
+  body
+    header
+      h1 Customer Care Course
+      nav
+        ul
+          li
+            a(href="#") Home
+          li
+            a(href="#") Modules
+          li
+            a(href="#") Contact
+          li.username-container
+            p.username-text= username
+    main
+      section
+        h2 Module 1: Introduction to Customer Service
+        p In this module, you will learn about the basics of customer service and how to provide excellent service to customers.
+        button(onclick="window.location.href='/cvideos'") Start Module
+      section
+        h2 Module 2: Handling Difficult Customers
+        p In this module, you will learn strategies for handling difficult customers and resolving customer complaints.
+        button Start Module
+      section
+        h2 Module 3: Effective Communication Skills
+        p In this module, you will learn about effective communication skills and how to use them in customer service situations.
+        button Start Module
+      section
+        h2 Module 4: Problem Solving Techniques
+        p In this module, you will learn about problem solving techniques and how to apply them to customer service situations.
+        button Start Module

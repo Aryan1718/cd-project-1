@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Customer Service Center</title>
+	<style>
+        body {
+			background-color: #E8F6E3;
+			font-family: Arial, sans-serif;
+		}
+		.video-container {
+			text-align: center;
+			margin-top: 30px;
+		}
+		.p{
+			text-align: center;
+		}
+		.h1{
+			text-align: center;
+		}
+		h2 {
+			margin-bottom: 20px;
+		}
+		.video {
+			width: 800px;
+			height: 450px;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<center><h1>Customer Service Center</h1></center>
+	<center><p><b>Welcome to the customer service center! Here you can find helpful videos to assist you with your inquiries.</b></p></center>
+	<div class="video-container">
+		<h2>How to reset your password</h2>
+		<video class="video" controls id="video1">
+			<source src="/static/Content-Video.mp4" type="video/mp4">
+		</video>
+		<p id="progress1"><b>0% watched</b></p>
+	</div>
+	<div class="video-container">
+		<h2>How to place an order</h2>
+		<video class="video" controls id="video2">
+			<source src="place_order.mp4" type="video/mp4">
+		</video>
+		<p id="progress2"><b>0% watched</b></p>
+	</div>
+	<div class="video-container">
+		<h2>How to return an item</h2>
+		<video class="video" controls id="video3">
+			<source src="return_item.mp4" type="video/mp4">
+		</video>
+		<p id="progress3"><b>0% watched</b></p>
+	</div>
+	<script>
+		const videos = document.querySelectorAll("video");
+		for (let i = 0; i < videos.length; i++) {
+			const video = videos[i];
+			const progress = document.querySelector(`#progress${i + 1}`);
+			video.addEventListener("timeupdate", function() {
+				const percentage = (video.currentTime / video.duration) * 100;
+				progress.innerText = `${Math.floor(percentage)}% watched`;
+			});
+		}
+	</script>
+</body>
+</html>
